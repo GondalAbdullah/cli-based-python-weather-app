@@ -46,7 +46,7 @@ def main():
                 mode = first
                 unit = last
                 url = ZIPCODE_BASE_URL.format(
-                    mode=mode,
+                    mode=first,
                     zip_code=second,
                     country_code=third,
                     api_key=API_KEY,
@@ -61,7 +61,7 @@ def main():
                 mode = first
                 unit = last
                 url = LATLON_BASE_URL.format(
-                    mode=mode,
+                    mode=first,
                     lat=second,
                     lon=third,
                     api_key=API_KEY,
@@ -75,7 +75,7 @@ def main():
             print(f"ERROR OCCURED with interactive input: {e}")
             log_error(f"ERROR OCCURED with interactive input: {e}")
 
-    if my_args:
+    else:
         try:
 
             unit = "imperial" if my_args.unit == "f" else "metric"
@@ -137,6 +137,9 @@ def main():
         try:
             print("Getting New data...\n")
             data = fetch_data(url)
+            print("--------", unit)
+            print("--------", mode)
+            print("--------", url)
             if not data:
                 raise ValueError("\nNo data found from API\n")
 
