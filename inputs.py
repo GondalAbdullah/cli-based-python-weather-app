@@ -104,10 +104,5 @@ def input_validation(choice, choices):
 
 
 if __name__ == "__main__":
-    my_args = get_args()
-
-    if not any([my_args.city, my_args.zipcode, my_args.latlon]):
-        print(user_input())
-    else:
-        print(f"{my_args}")
-        print(vars(my_args).values()[1])
+    mode_input = input_validation("mode of weather", ["weather", "forecast"])
+    print(mode_input)

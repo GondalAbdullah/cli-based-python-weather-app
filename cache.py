@@ -3,14 +3,22 @@ import time
 import json
 
 
-# Make sure the file exists
-def init_cache():
+def create_cache():
     if not os.path.exists("cache.json"):
         with open("cache.json", "w") as f:
             json.dump({}, f)
 
 
-# Generate a consistent key based on parameters
+def read_cache():
+    with open("cache.json", "r") as f:
+        return json.load(f)
+
+
+def write_cache(cache_data):
+    with open("cache.json", "w") as f:
+        json.dump(cache_data, f, indent=2)
+
+
 def generate_cache_key(mode, unit, **kwargs):
     parts = [f"mode={mode}", f"unit={unit}"] + [
         f"{k}={v}" for k, v in sorted(kwargs.items())
@@ -18,21 +26,8 @@ def generate_cache_key(mode, unit, **kwargs):
     return "|".join(parts)
 
 
-# Read JSON cache
-def read_cache():
-    with open("cache.json", "r") as f:
-        return json.load(f)
-
-
-# Write JSON cache
-def write_cache(cache_data):
-    with open("cache.json", "w") as f:
-        json.dump(cache_data, f, indent=2)
-
-
-# Get cached data if fresh
 def get_cached_data(key):
-    init_cache()
+    create_cache()
     cache = read_cache()
     if key in cache:
         entry = cache[key]
@@ -44,10 +39,9 @@ def get_cached_data(key):
     return None
 
 
-# Save API result to cache
 def save_to_cache(key, data):
     try:
-        init_cache()
+        create_cache()
         cache = read_cache()
         cache[key] = {"timestamp": time.time(), "data": data}
         write_cache(cache)
