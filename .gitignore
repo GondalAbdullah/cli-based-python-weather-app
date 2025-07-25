@@ -1,0 +1,7 @@
+__pycache__/
+weather_venv/
+.vscode/
+.env
+cache.json
+error.log
+recent.json
