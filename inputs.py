@@ -55,7 +55,7 @@ def get_args():
 
 def user_input():
     print("1. City Name    2. ZIP Code    3. Geographical Coordinates")
-    main_option = input("Enter the method by which you want your data: ")
+    main_option = input("Enter thee method by which you want your data: ")
 
     if main_option == "1":
         method = "city"
