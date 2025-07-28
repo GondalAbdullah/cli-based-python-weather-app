@@ -5,18 +5,18 @@ import json
 
 def create_cache():
     if not os.path.exists("cache.json"):
-        with open("cache.json", "w") as f:
-            json.dump({}, f)
+        with open("cache.json", "w") as cache_file:
+            json.dump({}, cache_file)
 
 
 def read_cache():
-    with open("cache.json", "r") as f:
-        return json.load(f)
+    with open("cache.json", "r") as cache_file:
+        return json.load(cache_file)
 
 
 def write_cache(cache_data):
-    with open("cache.json", "w") as f:
-        json.dump(cache_data, f, indent=2)
+    with open("cache.json", "w") as cache_file:
+        json.dump(cache_data, cache_file, indent=2)
 
 
 def generate_cache_key(mode, unit, **kwargs):
